@@ -2,7 +2,7 @@
 
 Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 3, integrando com o ELK Stack para visualização dos alertas em tempo real.
 
-## 🔧 Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - Snort 3
 - Elasticsearch
@@ -11,7 +11,7 @@ Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 3,
 - Kali Linux (para simular ataques)
 - Ubuntu Server
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - Deteção de:
   - Scan de portas (Nmap)

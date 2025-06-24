@@ -52,3 +52,43 @@ snort-elk-ids/
 | Ping           | `ping`       | Alerta ICMP                    | ✅       |
 | Port Scan      | `nmap`       | Alerta de scan de portas       | 🔜       |
 | SSH BruteForce | `hydra`      | Alerta de brute-force          | 🔜       |
+
+Trabalho dia 24/06
+
+🖥️ 1. Ambiente preparado
+
+    Máquina virtual criada (Ubuntu Server)
+
+    Sistema atualizado
+
+    Conectividade testada (ex: ping entre máquinas)
+
+🕵️‍♂️ 2. Snort instalado e configurado
+
+    Versão: Snort 2.9.20
+
+    snort.conf ajustado corretamente
+
+    Criado e usado o ficheiro de regras personalizadas: local.rules
+
+    Snort a correr com sucesso (ex: snort -A console -q -c /etc/snort/snort.conf -i eth0)
+
+    Teste feito com ping → Alerta detetado com sucesso ✅
+
+    📦 3. Elasticsearch instalado e operacional
+
+    Corrigido erro inicial relacionado com Java 21
+
+    Instalado e ativado Java 11
+
+    Heap ajustado para máquinas com pouca RAM (512m)
+
+    Elasticsearch iniciado e verificado com:
+
+curl -X GET "localhost:9200/"
+
+Elasticsearch a funcionar sem erros ✅
+
+
+
+

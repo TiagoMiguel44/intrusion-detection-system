@@ -57,33 +57,33 @@ Trabalho dia 24/06
 
 🖥️ 1. Ambiente preparado
 
-    Máquina virtual criada (Ubuntu Server)
+    - Máquina virtual criada (Ubuntu Server)
 
-    Sistema atualizado
+    - Sistema atualizado
 
-    Conectividade testada (ex: ping entre máquinas)
+    - Conectividade testada (ex: ping entre máquinas)
 
 🕵️‍♂️ 2. Snort instalado e configurado
 
-    Versão: Snort 2.9.20
+    - Versão: Snort 2.9.20
 
-    snort.conf ajustado corretamente
+    - snort.conf ajustado corretamente
 
-    Criado e usado o ficheiro de regras personalizadas: local.rules
+    - Criado e usado o ficheiro de regras personalizadas: local.rules
 
-    Snort a correr com sucesso (ex: snort -A console -q -c /etc/snort/snort.conf -i eth0)
+    - Snort a correr com sucesso (ex: snort -A console -q -c /etc/snort/snort.conf -i eth0)
 
-    Teste feito com ping → Alerta detetado com sucesso ✅
+    - Teste feito com ping → Alerta detetado com sucesso ✅
 
     📦 3. Elasticsearch instalado e operacional
 
-    Corrigido erro inicial relacionado com Java 21
+    - Corrigido erro inicial relacionado com Java 21
 
-    Instalado e ativado Java 11
+    - Instalado e ativado Java 11
 
-    Heap ajustado para máquinas com pouca RAM (512m)
+    - Heap ajustado para máquinas com pouca RAM (512m)
 
-    Elasticsearch iniciado e verificado com:
+    - Elasticsearch iniciado e verificado com:
 
 curl -X GET "localhost:9200/"
 

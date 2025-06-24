@@ -4,7 +4,7 @@ Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 3,
 
 ## Tecnologias utilizadas
 
-- Snort 3
+- Snort 2
 - Elasticsearch
 - Logstash
 - Kibana

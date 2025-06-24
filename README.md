@@ -44,3 +44,11 @@ snort-elk-ids/
 │ └── relatorio.md # Relatório técnico do projeto (explicações, prints, etc.)
 │
 └── README.md # Este ficheiro com a descrição geral do projeto
+
+## 🧪 Testes Realizados
+
+| Ataque        | Ferramenta   | Resultado Esperado             | Estado  |
+|----------------|--------------|----------------------------------|---------|
+| Ping           | `ping`       | Alerta ICMP                    | ✅       |
+| Port Scan      | `nmap`       | Alerta de scan de portas       | 🔜       |
+| SSH BruteForce | `hydra`      | Alerta de brute-force          | 🔜       |

@@ -143,7 +143,8 @@ ping <IP_da_VM>
 
 ## 2. Configuração do Snort
 
-    Snort configurado para gerar alertas no ficheiro /var/log/snort/snort.alert.fast. Foi necessario fazer a verificacao de que existia de facto o diretorio /var/log/snort/ (caso nao existisse teriamos que criar pelo comando sudo mkdir -p /var/log/snort) e tambem verificar se snort tinha permissoes para escrever no diretorio (sudo chown snort:snort /var/log/snort).
+    Snort configurado para gerar alertas no ficheiro /var/log/snort/snort.alert.fast. 
+    Foi necessario fazer a verificacao de que existia de facto o diretorio /var/log/snort/ (caso nao existisse teriamos que criar pelo comando sudo mkdir -p /var/log/snort) e tambem verificar se snort tinha permissoes para escrever no diretorio (sudo chown snort:snort /var/log/snort).
 
 ## 3. Configuração do Logstash
 
@@ -152,12 +153,12 @@ ping <IP_da_VM>
 
 ## 4. Validação do Logstash e Elasticsearch
 
-    Foi verificado que o Logstash está a processar logs e a enviar para Elasticsearch. Foi usado o comando curl -X GET "localhost:9200/_cat/indices?v". Este comando permitiu listar todos os ativos no Elasticsearch e confirmou que o indice snort-alerts-* existia e que estava a receber documentos (docs.count > 0).
+    Foi verificado que o Logstash está a processar logs e a enviar para Elasticsearch. 
+    Foi usado o comando curl -X GET "localhost:9200/_cat/indices?v". Este comando permitiu listar todos os ativos no Elasticsearch e confirmou que o indice snort-alerts-* existia e que estava a receber documentos (docs.count > 0).
 
 ## 5. Configuração do Logstash
 
     Foi criado Data View (Index Pattern) snort-alerts-* no Kibana.
-
     Confirmada a visualização dos logs no Discover do Kibana.
 
 

@@ -117,28 +117,29 @@ Trabalho dia 25/06
 
 ### 1. Configuração de Rede na Máquina Virtual
 
-Para permitir que o Snort monitorize tráfego externo (ex: pings de uma máquina Windows host), foi necessário configurar dois adaptadores de rede na máquina virtual:
-1. Adaptador 1: NAT
+Para permitir que o **Snort monitorize tráfego externo** (ex: pings de uma máquina Windows host), foi necessário configurar **dois adaptadores de rede** na máquina virtual:
 
-    Usado para dar acesso à internet na VM (atualizações, pacotes, etc.)
+- **Adaptador 1: NAT**
+  - Usado para dar acesso à internet na VM (atualizações, pacotes, etc.)
+  - Permite que a VM tenha saída para a internet, mas **não é útil para tráfego local do host** (ex: ping da máquina real)
 
-    Permite que a VM tenha saída para a internet, mas não é útil para tráfego local do host (ex: ping da máquina real)
+- **Adaptador 2: Host-only Adapter**
+  - Configurado como *Host-only Adapter*
+  - Permite que o **host Windows comunique com a VM**
+  - Essencial para simular ataques e tráfego real do host para a VM
 
-2. Adaptador 2: Host-only Adapter
+### 🧪 Teste efetuado:
 
-    Configurado Host-only Adapter
+Depois de configurar os dois adaptadores, foi possível executar:
 
-    Permite que o host Windows comunique com a VM
-
-    Essencial para simular ataques e tráfego real do host para a VM
-
-🧪 Teste feito:
-
-    Depois de configurar os dois adaptadores, foi possível executar:
-
+```bash
 ping <IP_da_VM>
 
-...a partir do Windows, e o Snort passou a capturar esse tráfego ICMP, gerando alertas no ficheiro snort.alert.fast. Foi tambem testado a captura do trafego ICMP pelo tcpdump (sudo tcpdump -i <interface>).
+A partir do Windows,e o Snort passou a capturar esse tráfego ICMP, gerando alertas no ficheiro snort.alert.fast.
+
+Também foi testada a captura do tráfego ICMP com o comando:
+
+sudo tcpdump -i <interface>
 
 ### 1. Configuração do Snort
 

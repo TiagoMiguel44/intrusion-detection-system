@@ -113,9 +113,13 @@ Trabalho dia 24/06
 
       - Elasticsearch a funcionar sem erros ✅
 
-Trabalho dia 25/06
+ Integração Snort + ELK Stack — Registo do Trabalho (25/06)
 
-### 1. Configuração de Rede na Máquina Virtual
+Este documento regista o progresso realizado no dia 25/06 na integração entre o Snort e a stack ELK (Elasticsearch, Logstash, Kibana), incluindo a configuração da rede, Snort, Logstash e visualização no Kibana.
+
+---
+
+## 1. Configuração de Rede na Máquina Virtual
 
 Para permitir que o **Snort monitorize tráfego externo** (ex: pings de uma máquina Windows host), foi necessário configurar **dois adaptadores de rede** na máquina virtual:
 
@@ -135,28 +139,58 @@ Depois de configurar os dois adaptadores, foi possível executar:
 ```bash
 ping <IP_da_VM>
 
-A partir do Windows,e o Snort passou a capturar esse tráfego ICMP, gerando alertas no ficheiro snort.alert.fast.
+A partir do Windows, e o Snort passou a capturar esse tráfego ICMP, gerando alertas no ficheiro snort.alert.fast.
 
 Também foi testada a captura do tráfego ICMP com o comando:
 
 sudo tcpdump -i <interface>
 
-### 1. Configuração do Snort
+2. Configuração do Snort
 
-- Snort configurado para gerar alertas no ficheiro `/var/log/snort/snort.alert.fast`. Foi necessario fazer a verificacao de que existia de facto o diretorio /var/log/snort/ (caso nao existisse teriamos que criar pelo comando sudo mkdir -p /var/log/snort) e tambem verificar se snort tinha permissoes para escrever no diretorio (sudo chown snort:snort /var/log/snort).
+    Snort foi configurado para gerar alertas no ficheiro:
 
-### 2. Configuração do Logstash
+/var/log/snort/snort.alert.fast
 
-- Criado ficheiro `/etc/logstash/conf.d/snort.conf`
-- Foi reiniciado o Logstash para aplicar configuração.
+    Foi necessário verificar a existência do diretório:
 
-### 3. Validação do Logstash e Elasticsearch
+sudo mkdir -p /var/log/snort
 
-- Foi verificado que o Logstash está a processar logs e a enviar para Elasticsearch. Foi usado o comando curl -X GET "localhost:9200/_cat/indices?v". Este comando permitiu listar todos os ativos no Elasticsearch e confirmou que o indice snort-alerts-* existia e que estava a receber documentos (docs.count > 0).
+    Garantido que o Snort tinha permissões para escrever nesse diretório:
 
-### 4. Configuração do Logstash
+sudo chown snort:snort /var/log/snort
 
-- Foi criado Data View (Index Pattern) snort-alerts-* no Kibana.
+3. Configuração do Logstash
 
-- Confirmada a visualização dos logs no Discover do Kibana.
+    Criado o ficheiro de configuração:
+
+/etc/logstash/conf.d/snort.conf
+
+    Após isso, o Logstash foi reiniciado para aplicar as configurações:
+
+sudo systemctl restart logstash
+
+4. Validação do Logstash e Elasticsearch
+
+    Confirmado que o Logstash está a processar logs e a enviar para o Elasticsearch.
+
+    Usado o seguinte comando para listar os índices existentes:
+
+curl -X GET "localhost:9200/_cat/indices?v"
+
+    Verificou-se que o índice snort-alerts-* existia e estava a receber documentos (docs.count > 0), o que indica que os alertas estavam a ser ingeridos com sucesso.
+
+5. Configuração do Kibana
+
+    Criado um Data View (Index Pattern) com o nome:
+
+snort-alerts-*
+
+    Confirmado que os logs estavam visíveis no Discover do Kibana, com os campos parseados corretamente.
+
+✅ A integração entre Snort e ELK foi validada com sucesso, e os alertas estão agora disponíveis para exploração e visualização no Kibana.
+
+
+---
+
+Se quiseres, posso adicionar também um sumário geral ou uma secção para "Próximos Passos" 
 

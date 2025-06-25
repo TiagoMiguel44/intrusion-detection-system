@@ -1,6 +1,6 @@
 # Sistema de Deteção de Intrusões com Snort e ELK Stack
 
-Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 3, integrando com o ELK Stack para visualização dos alertas em tempo real.
+Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 2, integrando com o ELK Stack para visualização dos alertas em tempo real.
 
 ## Tecnologias utilizadas
 
@@ -51,7 +51,7 @@ intrusion-detection-system/
 ├── README.md
 ├── docs/
 │   └── arquitetura.png         # (opcional) Diagrama de arquitetura
-├── snort/
+├── config/
 │   ├── snort.conf              # Ficheiro principal de configuração do Snort
 │   └── rules/
 │       └── local.rules         # Regras personalizadas
@@ -95,13 +95,13 @@ Trabalho dia 24/06
 
     - Criado e usado o ficheiro de regras personalizadas: local.rules
 
-    - Snort a correr com sucesso (ex: snort -A console -q -c /etc/snort/snort.conf -i eth0)
+    - Snort a correr com sucesso (ex: snort -A console -q -c /etc/snort/snort.conf -i <interface>)
 
     - Teste feito com ping → Alerta detetado com sucesso ✅
 
     📦 3. Elasticsearch instalado e operacional
 
-    - Corrigido erro inicial relacionado com Java 21
+    - Corrigido erro inicial relacionado com Java 21. A versao do snort que esta a ser utilizada nao trabalhava com Java 21, entao foi necessario mudar para Java 11
 
     - Instalado e ativado Java 11
 
@@ -109,10 +109,53 @@ Trabalho dia 24/06
 
     - Elasticsearch iniciado e verificado com:
 
-curl -X GET "localhost:9200/"
+      - curl -X GET "localhost:9200/"
 
-Elasticsearch a funcionar sem erros ✅
+      - Elasticsearch a funcionar sem erros ✅
 
+Trabalho dia 25/06
 
+### 1. Configuração de Rede na Máquina Virtual
 
+Para permitir que o Snort monitorize tráfego externo (ex: pings de uma máquina Windows host), foi necessário configurar dois adaptadores de rede na máquina virtual:
+1. Adaptador 1: NAT
+
+    Usado para dar acesso à internet na VM (atualizações, pacotes, etc.)
+
+    Permite que a VM tenha saída para a internet, mas não é útil para tráfego local do host (ex: ping da máquina real)
+
+2. Adaptador 2: Host-only Adapter
+
+    Configurado Host-only Adapter
+
+    Permite que o host Windows comunique com a VM
+
+    Essencial para simular ataques e tráfego real do host para a VM
+
+🧪 Teste feito:
+
+    Depois de configurar os dois adaptadores, foi possível executar:
+
+ping <IP_da_VM>
+
+...a partir do Windows, e o Snort passou a capturar esse tráfego ICMP, gerando alertas no ficheiro snort.alert.fast. Foi tambem testado a captura do trafego ICMP pelo tcpdump (sudo tcpdump -i <interface>).
+
+### 1. Configuração do Snort
+
+- Snort configurado para gerar alertas no ficheiro `/var/log/snort/snort.alert.fast`. Foi necessario fazer a verificacao de que existia de facto o diretorio /var/log/snort/ (caso nao existisse teriamos que criar pelo comando sudo mkdir -p /var/log/snort) e tambem verificar se snort tinha permissoes para escrever no diretorio (sudo chown snort:snort /var/log/snort).
+
+### 2. Configuração do Logstash
+
+- Criado ficheiro `/etc/logstash/conf.d/snort.conf`
+- Foi reiniciado o Logstash para aplicar configuração.
+
+### 3. Validação do Logstash e Elasticsearch
+
+- Foi verificado que o Logstash está a processar logs e a enviar para Elasticsearch. Foi usado o comando curl -X GET "localhost:9200/_cat/indices?v". Este comando permitiu listar todos os ativos no Elasticsearch e confirmou que o indice snort-alerts-* existia e que estava a receber documentos (docs.count > 0).
+
+### 4. Configuração do Logstash
+
+- Foi criado Data View (Index Pattern) snort-alerts-* no Kibana.
+
+- Confirmada a visualização dos logs no Discover do Kibana.
 

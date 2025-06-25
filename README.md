@@ -114,23 +114,24 @@ Trabalho dia 24/06
       - Elasticsearch a funcionar sem erros ✅
 
 Trabalho dia 25/06
+
 ## 1. Configuração de Rede na Máquina Virtual
 
 Para permitir que o Snort monitorize tráfego externo (ex: pings de uma máquina Windows host), foi necessário configurar dois adaptadores de rede na máquina virtual:
 
     Adaptador 1: NAT
 
-    Usado para dar acesso à internet na VM (atualizações, pacotes, etc.)
+      - Usado para dar acesso à internet na VM (atualizações, pacotes, etc.)
 
-    Permite que a VM tenha saída para a internet, mas não é útil para tráfego local do host (ex: ping da máquina real)
+      - Permite que a VM tenha saída para a internet, mas não é útil para tráfego local do host (ex: ping da máquina real)
 
     Adaptador 2: Host-only Adapter
 
-    Configurado Host-only Adapter
+      - Configurado Host-only Adapter
 
-    Permite que o host Windows comunique com a VM
+      - Permite que o host Windows comunique com a VM
 
-    Essencial para simular ataques e tráfego real do host para a VM
+      - Essencial para simular ataques e tráfego real do host para a VM
 
 🧪 Teste feito:
 

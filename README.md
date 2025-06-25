@@ -8,7 +8,6 @@ Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 2,
 - Elasticsearch
 - Logstash
 - Kibana
-- Kali Linux (para simular ataques)
 - Ubuntu Server
 
 ## Funcionalidades

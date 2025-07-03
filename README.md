@@ -70,17 +70,17 @@ intrusion-detection-system/
 │   └── test_ping.sh            # Scripts de ataque/simulação
 └── .gitignore
 
-Regras Atuais (Snort - `local.rules`)
+# 🔒 Regras Atuais (`local.rules`)
 
-```snort
-# Deteção de ICMP
+- Deteção de ICMP
 alert icmp any any -> any any (msg:"ICMP packet detected"; sid:1000001; rev:1;)
 
-# SSH Brute Force
+- SSH Brute Force
 alert tcp any any -> 192.168.56.102 22 (msg:"Possible SSH brute force attack"; flags:S; threshold:type threshold, track by_src, count 5, seconds 60; sid:1000002; rev:1;)
 
-# Reverse Shell
+- Reverse Shell
 alert tcp $EXTERNAL_NET any -> $HOME_NET 4444 (msg:"Possible reverse shell attempt"; sid:1000003; rev:1;)
+
 
 ## 🧪 Testes Realizados
 

@@ -23,32 +23,7 @@ Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 2,
 - Visualização em tempo real via Kibana
 - Simulação de ataques reais para validação do IDS
 
-
-## 📂 Estrutura do Projeto (PLANO)
-
-snort-elk-ids/
-├── config/ # Configurações do Snort
-│ └── snort-rules/ # Regras personalizadas de deteção
-│ ├── custom.rules # Ficheiro com as tuas regras Snort
-│ └── sid-msg.map # Mapeamento de SIDs para mensagens legíveis
-│
-├── elk/ # Ficheiros de configuração do ELK Stack
-│ ├── logstash.conf # Configuração do Logstash para parsing dos alertas do Snort
-│ ├── elasticsearch.yml # Configuração do Elasticsearch
-│ └── kibana-dashboard.json # Export de dashboards prontos no Kibana
-│
-├── scripts/ # Scripts auxiliares
-│ └── setup-snort.sh # Script para instalar e configurar o Snort
-│
-├── tests/ # Simulações de ataques
-│ └── attack-scenarios.md # Documentação dos ataques realizados para testar o IDS
-│
-├── docs/ # Documentação e relatórios do projeto
-│ └── relatorio.md # Relatório técnico do projeto (explicações, prints, etc.)
-│
-└── README.md # Este ficheiro com a descrição geral do projeto
-
-## 📂 Estrutura do Projeto (O QUE TENHO POR AGORA)
+## 📂 Estrutura do Projeto 
 
 intrusion-detection-system/
 ├── README.md

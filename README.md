@@ -1,4 +1,4 @@
-# Sistema de Deteção de Intrusões com Snort e ELK Stack
+# Sistema de Deteção de Intrusões com Snort e ELK Stack (EM DESENVOLVIMENTO)
 
 Este projeto implementa um sistema de deteção de intrusões (IDS) com Snort 2, integrando com o ELK Stack para visualização dos alertas em tempo real.
 
